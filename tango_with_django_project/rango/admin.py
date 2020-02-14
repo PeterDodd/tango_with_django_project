@@ -2,6 +2,10 @@ from django.contrib import admin
 from rango.models import Category, Page, Question, Choice
 
 
+class CategoryAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('name',)}
+
+
 class ChoiceInLine(admin.TabularInline):
     model = Choice
     extra = 3
@@ -20,5 +24,5 @@ class PageAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Question, QuestionAdmin)
-admin.site.register(Category)
+admin.site.register(Category, CategoryAdmin)
 admin.site.register(Page, PageAdmin)
